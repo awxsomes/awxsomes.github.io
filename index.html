@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Alex Chen — student, researcher, and builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafaf8;
+    --surface:#ffffff;
+    --surface-2:#f3f4f1;
+    --ink:#1c2321;
+    --ink-2:#3d4a47;
+    --muted:#6f7d7a;
+    --line:#e2e6e3;
+    --line-strong:#cbd3cf;
+    --accent:#2f6f6a;
+    --accent-soft:#eaf2f0;
+    --python:#3572A5;
+    --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#111514;
+      --surface:#171d1c;
+      --surface-2:#1d2423;
+      --ink:#e8edeb;
+      --ink-2:#c2ccc9;
+      --muted:#8fa09c;
+      --line:#26302e;
+      --line-strong:#374440;
+      --accent:#7fc6bf;
+      --accent-soft:#1a2a28;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px}
+  a{color:var(--accent);text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent);text-underline-offset:3px}
+  a:hover{text-decoration-color:var(--accent)}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+  /* header */
+  .top{border-bottom:1px solid var(--line);background:var(--surface)}
+  .top-inner{max-width:880px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+  .top-inner nav{display:flex;gap:18px;flex-wrap:wrap}
+  .top-inner nav a{color:var(--ink-2);text-decoration:none;font-weight:500}
+  .top-inner nav a:hover{text-decoration:underline}
+
+  /* intro */
+  .intro{padding:40px 0 8px}
+  .intro-head{display:flex;gap:18px;align-items:center}
+  @media(max-width:520px){.intro-head{flex-direction:column;align-items:flex-start}}
+  .avatar{width:76px;height:76px;border-radius:12px;border:1px solid var(--line);display:block;background:#fff;image-rendering:pixelated}
+  h1{font-size:32px;line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:700}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px}
+  .sub a{color:var(--ink-2);font-weight:600;text-decoration:none}
+  .sub a:hover{text-decoration:underline}
+  .bio{margin:22px 0 0;color:var(--ink-2);max-width:68ch}
+  .bio p{margin:0 0 14px}
+  .bio p:last-child{margin-bottom:0}
+  .bio strong{color:var(--ink);font-weight:600}
+  .facts{margin:20px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:14.5px;color:var(--ink-2)}
+  @media(max-width:600px){.facts{grid-template-columns:1fr}}
+  .facts dt{color:var(--muted)}
+  .facts div{display:flex;gap:8px}
+  .facts dd{margin:0;font-weight:500;color:var(--ink)}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;border-radius:8px;padding:9px 14px;font-weight:600;font-size:14px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink)}
+  .btn:hover{border-color:var(--ink-2)}
+  .btn-main{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  @media (prefers-color-scheme: dark){.btn-main{background:#e8edeb;color:#111514;border-color:#e8edeb}}
+
+  /* sections */
+  section{padding:30px 0 6px}
+  h2{font-size:22px;line-height:1.25;letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+  .section-intro{margin:0 0 18px;color:var(--muted);font-size:15px;max-width:66ch}
+  h3{font-size:16px;margin:0;font-weight:600}
+
+  /* now lists */
+  .plain-list{border-top:1px solid var(--line)}
+  .row{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:170px 1fr;gap:6px 22px}
+  @media(max-width:640px){.row{grid-template-columns:1fr}}
+  .row-when{font-size:13.5px;color:var(--muted);padding-top:2px}
+  .row-what p{margin:5px 0 0;color:var(--ink-2);font-size:15px;line-height:1.65}
+  .row-what p a{font-weight:500}
+  .role{color:var(--muted);font-weight:500;font-size:14.5px}
+
+  /* repos */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+  .filter-group{display:flex;gap:8px;flex-wrap:wrap}
+  .filter-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);padding:7px 12px;border-radius:999px;font-weight:600;font-size:13.5px;cursor:pointer}
+  .filter-btn.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  @media (prefers-color-scheme: dark){.filter-btn.active{background:#e8edeb;color:#111514;border-color:#e8edeb}}
+  .search{flex:1;min-width:180px;max-width:320px}
+  .search input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px;outline:none}
+  .search input:focus{border-color:var(--accent)}
+  .result-count{font-size:13px;color:var(--muted)}
+  .repo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  @media(max-width:700px){.repo-grid{grid-template-columns:1fr}}
+  .repo-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit}
+  .repo-card:hover{border-color:var(--line-strong)}
+  .repo-name{font-weight:600;font-size:16px;line-height:1.3;word-break:break-word}
+  .repo-name span{color:var(--muted);font-weight:500}
+  .repo-desc{color:var(--ink-2);font-size:14.5px;line-height:1.6;margin:0;flex:1}
+  .repo-desc em{font-style:normal;color:var(--muted);display:block;margin-top:6px;font-size:14px}
+  .repo-footer{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;border-top:1px solid var(--line);padding-top:11px;font-size:12.5px;color:var(--muted)}
+  .lang{display:inline-flex;align-items:center;gap:6px;font-weight:500;color:var(--ink-2)}
+  .lang-dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .empty{grid-column:1/-1;text-align:center;padding:28px 20px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--radius);color:var(--muted)}
+
+  /* skills */
+  .skills{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+  .skills p{margin:0 0 12px;color:var(--ink-2);font-size:15px}
+  .skills p:last-child{margin-bottom:0}
+  .skills strong{color:var(--ink)}
+  .lang-bar{display:flex;height:8px;border-radius:999px;overflow:hidden;background:var(--surface-2);margin:16px 0 10px}
+  .lang-bar div{height:100%}
+  .lang-note{font-size:13.5px;color:var(--muted)}
+
+  /* contact / footer */
+  .contact{margin:30px 0 6px;background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .contact h2{font-size:20px}
+  .contact p{margin:6px 0 0;color:var(--ink-2);max-width:60ch;font-size:15px}
+  .contact-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  footer{padding:20px 0 36px;color:var(--muted);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+  footer a{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <span>Alex Chen · College Park, MD</span>
+    <nav aria-label="Profiles">
+      <a href="https://github.com/awxsomes" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/alex-chen-dongyu/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#repos">Projects</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-head">
+      <img class="avatar" src="data:image/png;base64,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" alt="GitHub avatar for awxsomes" width="76" height="76" />
+      <div>
+        <h1>Hi, I'm Alex Chen.</h1>
+        <div class="sub">Undergrad at UMD · <a href="https://github.com/awxsomes" target="_blank" rel="noopener">@awxsomes on GitHub</a></div>
+      </div>
+    </div>
+
+    <div class="bio">
+      <p>I'm a student at the <strong>University of Maryland, College Park</strong> (class of 2028) studying <strong>computer science, applied mathematics, and linguistics</strong>. I'm also in the Honors College's ACES program — the Advanced Cybersecurity Experience for Students living-learning program.</p>
+      <p>Most of what I do is research and building things to test an idea. I tend to read a paper, wonder if I could reproduce it, and then spend a few weeks finding out. Sometimes that turns into a publication, sometimes it just turns into a repo and a lot of notes. Right now that means constrained machine-learning models at UMD, a backend for an agroecology lab, and a stock-trading model I run on paper money to see how it holds up.</p>
+      <p>This page is mostly my GitHub, with a bit of context from my resume so the repos make more sense.</p>
+    </div>
+
+    <dl class="facts" aria-label="Quick facts">
+      <div><dt>School</dt><dd>UMD, expected May 2028</dd></div>
+      <div><dt>Majors</dt><dd>CS, Applied Math, Linguistics</dd></div>
+      <div><dt>Based in</dt><dd>College Park, MD</dd></div>
+      <div><dt>On GitHub</dt><dd>Since Nov 2022 · 6 public repos</dd></div>
+    </dl>
+
+    <div class="actions">
+      <a class="btn btn-main" href="https://github.com/awxsomes" target="_blank" rel="noopener">GitHub profile</a>
+      <a class="btn" href="https://www.linkedin.com/in/alex-chen-dongyu/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="mailto:alchen2626@gmail.com">alchen2626@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- WHAT I'M DOING NOW -->
+  <section aria-labelledby="now-h">
+    <h2 id="now-h">What I'm doing at the moment</h2>
+    <p class="section-intro">Three things take up most of my time this semester.</p>
+    <div class="plain-list">
+      <div class="row">
+        <div class="row-when">Sep 2026 — present</div>
+        <div class="row-what">
+          <h3>Backend work for the Agroecology Lab <span class="role">— App Dev Club @ UMD</span></h3>
+          <p>I'm helping build an interactive map where the research team can draw and save land-parcel boundaries. The boundaries are stored as PostGIS polygons in a shared Postgres database on AWS RDS, and I'm writing FastAPI endpoints with teammates to connect the React frontend to that database. A lot of it is translating the team's ERD into a schema for parcels, goals, and practices that actually works.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-when">Jun 2025 — present</div>
+        <div class="row-what">
+          <h3>Research at UMD <span class="role">— constrained models</span></h3>
+          <p>I work on models that are forced to stay calibrated instead of just chasing accuracy. That includes a constrained neural network I built from scratch in NumPy/CuPy (with hand-written, CUDA-accelerated backprop) and a constrained random forest.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row-when">Jul 2026 — present</div>
+        <div class="row-what">
+          <h3>Side projects</h3>
+          <p>An AI trading model running on Alpaca paper trading, and a webcam project that swaps cat memes based on your facial expression. Both are on GitHub if you want to look.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPOS -->
+  <section id="repos" aria-labelledby="repos-h">
+    <h2 id="repos-h">Pinned repos</h2>
+    <p class="section-intro">The projects I want to highlight, in order of most recent activity — five from my own GitHub, plus a team project below. I'm leaving website-code out of this list; that was just hackathon code and isn't representative of the rest. I've added a line underneath each one where the repo name alone doesn't explain much.</p>
+
+    <div class="toolbar">
+      <div class="filter-group" role="group" aria-label="Filter by language">
+        <button class="filter-btn active" data-filter="all" type="button">All · 6</button>
+        <button class="filter-btn" data-filter="Python" type="button">Python · 5</button>
+        <button class="filter-btn" data-filter="JavaScript" type="button">JavaScript · 1</button>
+      </div>
+      <label class="search">
+        <span style="position:absolute;left:-9999px">Search repositories</span>
+        <input id="searchInput" type="search" placeholder="Search projects…" autocomplete="off" />
+      </label>
+      <span class="result-count" id="resultCount">Showing 6 of 6</span>
+    </div>
+
+    <div class="repo-grid" id="repoGrid">
+      <a class="repo-card" data-lang="Python" data-search="ai-trader ai trader statistical arbitrage deep learning pytorch alpaca finance autotrader" href="https://github.com/awxsomes/AI-Trader" target="_blank" rel="noopener">
+        <div class="repo-name"><span>awxsomes /</span> AI-Trader</div>
+        <p class="repo-desc">Little project to develop an AI trader<em>A deep-learning statistical arbitrage replication in PyTorch, plus live paper trading on Alpaca.</em></p>
+        <div class="repo-footer"><span class="lang"><span class="lang-dot" style="background:var(--python)"></span>Python</span><span>Updated Oct 15, 2026</span></div>
+      </a>
+
+      <a class="repo-card" data-lang="Python" data-search="neetcode submissions algorithms data structures leetcode dsa" href="https://github.com/awxsomes/neetcode-submissions" target="_blank" rel="noopener">
+        <div class="repo-name"><span>awxsomes /</span> neetcode-submissions</div>
+        <p class="repo-desc">My NeetCode.io problem submissions<em>Just my algorithms practice, organised by topic. Less polished than the other repos, but it's where a lot of the basics got learned.</em></p>
+        <div class="repo-footer"><span class="lang"><span class="lang-dot" style="background:var(--python)"></span>Python</span><span>Updated Oct 7, 2026</span></div>
+      </a>
+
+      <a class="repo-card" data-lang="Python" data-search="cat image detector expression mediapipe pytorch computer vision webcam memes gesture catmeme mirror" href="https://github.com/awxsomes/Cat-Image-Detector" target="_blank" rel="noopener">
+        <div class="repo-name"><span>awxsomes /</span> Cat-Image-Detector</div>
+        <p class="repo-desc">cat memes!<em>I call this CatMeme Mirror on my resume. It reads your face and hands from a webcam (117 MediaPipe features), runs them through a small PyTorch model — 0.91 validation accuracy across six expressions and gestures, trained on 4,789 frames — and changes the image on screen to match. Silly idea, surprisingly fiddly to make not flicker.</em></p>
+        <div class="repo-footer"><span class="lang"><span class="lang-dot" style="background:var(--python)"></span>Python</span><span>Updated Aug 24, 2026</span></div>
+      </a>
+
+      <a class="repo-card" data-lang="Python" data-search="unbiased random forests constrained random forest machine learning research simulation xgboost" href="https://github.com/awxsomes/Unbiased-Random-Forests" target="_blank" rel="noopener">
+        <div class="repo-name"><span>awxsomes /</span> Unbiased-Random-Forests</div>
+        <p class="repo-desc">Unbiased predictions for continuous outcomes using constrained random forests<em>This is the code for my UMD constrained-model research. One command reproduces the full set of simulations — constrained forest vs. regular random forest, a neural net, and XGBoost, across 100 replications.</em></p>
+        <div class="repo-footer"><span class="lang"><span class="lang-dot" style="background:var(--python)"></span>Python</span><span>Updated Aug 22, 2026</span></div>
+      </a>
+
+      <a class="repo-card" data-lang="JavaScript" data-search="skin analysis app astro react onnx mediapipe acne classifier bitcamp browser team kcyle" href="https://github.com/Kcyle/skin-analysis-app" target="_blank" rel="noopener">
+        <div class="repo-name"><span>Kcyle /</span> skin-analysis-app</div>
+        <p class="repo-desc">Skin analysis web app<em>Team project from Bitcamp in April 2026 that I helped ship. A 14 MB acne classifier runs entirely in the browser with ONNX Runtime Web — built with Astro, React, and MediaPipe — so photos never leave the device.</em></p>
+        <div class="repo-footer"><span class="lang"><span class="lang-dot" style="background:#d9b700"></span>JavaScript</span><span>Apr 12, 2026 · Team repo</span></div>
+      </a>
+
+      <a class="repo-card" data-lang="Python" data-search="tga ga genetic algorithm matlab python optimisation nasa dragonfly" href="https://github.com/awxsomes/TGA_GA" target="_blank" rel="noopener">
+        <div class="repo-name"><span>awxsomes /</span> TGA_GA</div>
+        <p class="repo-desc">Genetic algorithm frames in Python &amp; MATLAB<em>My first public repo. It's the public version of the genetic algorithm work I did at JHU APL — same approach, written once in Python and once in MATLAB.</em></p>
+        <div class="repo-footer"><span class="lang"><span class="lang-dot" style="background:var(--python)"></span>Python · MATLAB</span><span>Updated Mar 29, 2025</span></div>
+      </a>
+
+      <div class="empty" id="emptyState" hidden>
+        <strong style="color:var(--ink)">Nothing matches that search.</strong><br>
+        Try “trader”, “forest”, “cat”, or “skin”.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SKILLS -->
+  <section aria-labelledby="skills-h">
+    <h2 id="skills-h">Tools I actually use</h2>
+    <p class="section-intro">From my resume — not everything I've ever touched, just what shows up in the work above.</p>
+    <div class="skills">
+      <p><strong>Languages:</strong> Python most days, plus Java, C++, C, SQL, MATLAB, R, and JavaScript.</p>
+      <p><strong>Machine learning:</strong> PyTorch, NumPy, pandas, scikit-learn, XGBoost, CuPy and CUDA when I need things to run faster.</p>
+      <p><strong>Other tools:</strong> Git and GitHub Actions, Linux, React, MediaPipe, FastAPI, and PostgreSQL / PostGIS on AWS RDS.</p>
+      <div class="lang-bar" role="img" aria-label="GitHub language breakdown: Python 77.3 percent, JavaScript 19.5 percent, MATLAB 2.3 percent, other under 1 percent">
+        <div style="width:77.3%;background:#3572A5"></div>
+        <div style="width:19.5%;background:#d9b700"></div>
+        <div style="width:2.3%;background:#c45a32"></div>
+        <div style="width:0.9%;background:#8fa09c"></div>
+      </div>
+      <div class="lang-note">For reference, GitHub counts my public code as about 77% Python, 20% JavaScript, and 2% MATLAB — which feels about right.</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact">
+    <h2>Say hello</h2>
+    <p>If you want to talk about any of this — the research, the trading project, or just a repo — the easiest ways to reach me are below. I read my email more reliably than anything else.</p>
+    <div class="contact-links">
+      <a class="btn" href="mailto:alchen2626@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/alex-chen-dongyu/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/awxsomes?tab=repositories" target="_blank" rel="noopener">All repos on GitHub</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Alex Chen · College Park, MD · GitHub data as of Oct 26, 2026 (last push Oct 15)</span>
+    <span><a href="https://github.com/awxsomes" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/alex-chen-dongyu/" target="_blank" rel="noopener">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var filter = 'all';
+  var query = '';
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.repo-card'));
+  var empty = document.getElementById('emptyState');
+  var count = document.getElementById('resultCount');
+  var buttons = document.querySelectorAll('.filter-btn');
+  var input = document.getElementById('searchInput');
+
+  function apply(){
+    var visible = 0;
+    cards.forEach(function(card){
+      var langOk = filter === 'all' || card.getAttribute('data-lang') === filter;
+      var text = (card.textContent + ' ' + (card.getAttribute('data-search')||'')).toLowerCase();
+      var words = text.split(/[^a-z0-9]+/);
+      var qOk = !query || words.some(function(w){ return w.indexOf(query) === 0; });
+      var show = langOk && qOk;
+      card.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    empty.hidden = visible !== 0;
+    count.textContent = 'Showing ' + visible + ' of ' + cards.length;
+  }
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      buttons.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      filter = btn.getAttribute('data-filter');
+      apply();
+    });
+  });
+  input.addEventListener('input', function(){
+    query = input.value.trim().toLowerCase();
+    apply();
+  });
+
+})();
+</script>
+</body>
+</html>
